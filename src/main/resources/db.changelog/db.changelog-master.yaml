@@ -1,0 +1,9 @@
+databaseChangeLog:
+  - include:
+      file: db/changelog/changeset/create-table-users.yaml
+  - include:
+      file: db/changelog/changeset/create-table-roles.yaml
+  - include:
+      file: db/changelog/changeset/create-table-services.yaml
+  - include:
+      file: db/changelog/changeset/insert-admin.yaml

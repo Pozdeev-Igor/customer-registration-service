@@ -1,0 +1,28 @@
+- changeSet:
+    id: 4
+    author: Marsel
+    comment: "Create admin user"
+    changes:
+      - insert:
+          tableName: users
+          columns:
+            - column:
+                name: first_name
+                value: "admin"
+            - column:
+                name: last_name
+                value: "adminov"
+            - column:
+                name: phone_number
+                value: "891001234567"
+            - column:
+                name: email
+                value: "admin@mail.ru"
+            - column:
+                name: birthDate
+                value: "01.11.1970"
+            - column:
+                name: password
+                value: "admin"
+
+
