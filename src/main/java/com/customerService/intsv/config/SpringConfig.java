@@ -1,5 +1,6 @@
 package com.customerService.intsv.config;
 
+import liquibase.integration.spring.SpringLiquibase;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
@@ -41,6 +42,9 @@ public class SpringConfig implements WebMvcConfigurer {
     private String hibernateDialect;
     @Value("${spring.jpa.show-sql}")
     private boolean showSQL;
+
+    @Value("${spring.liquibase.change-log}")
+    private String changelogFile;
 
     public SpringConfig(ApplicationContext applicationContext) {
         this.applicationContext = applicationContext;
@@ -85,5 +89,13 @@ public class SpringConfig implements WebMvcConfigurer {
         transactionManager.setEntityManagerFactory(entityManagerFactory().getObject());
 
         return transactionManager;
+    }
+
+    @Bean
+    public SpringLiquibase springLiquibase(DataSource dataSource) {
+        SpringLiquibase springLiquibase = new SpringLiquibase();
+        springLiquibase.setDataSource(this.dataSource());
+        springLiquibase.setChangeLog(changelogFile);
+        return springLiquibase;
     }
 }

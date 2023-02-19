@@ -1,10 +1,11 @@
-package com.customerService.intsv.repository.liquibase;
+package com.customerService.intsv.config;
 
-import com.sun.xml.bind.v2.TODO;
 import liquibase.integration.spring.SpringLiquibase;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.util.Assert;
@@ -14,6 +15,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Configuration
+@PropertySource("classpath:application.properties")
 public class LiquibaseConfig {
 
     @Autowired
@@ -22,11 +24,13 @@ public class LiquibaseConfig {
     @Autowired
     private ResourceLoader resourceLoader;
 
+    @Value("${spring.liquibase.change-log}")
+    String changelogFile;
+
     @Bean
-    public SpringLiquibase liquibase(){
+    public SpringLiquibase liquibase() {
 
 
-        String changelogFile = "classpath:/liquibase/changelog.xml"; // изменить путь,после того,как Марсель запилит миграции. Затестить
         Resource resource = resourceLoader.getResource(changelogFile);
         Assert.state(resource.exists(), "Unable to find file: " + changelogFile);
 
@@ -35,7 +39,7 @@ public class LiquibaseConfig {
         liquibase.setChangeLog(changelogFile);
         liquibase.setContexts("test,dev,prod");
         liquibase.setDataSource(dataSource);
-        liquibase.setDefaultSchema("mySchema");
+        liquibase.setDefaultSchema("public");
         liquibase.setDropFirst(false);
         liquibase.setShouldRun(true);
 

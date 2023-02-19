@@ -1,5 +1,6 @@
-- changeSet:
-    id: 4
+databaseChangeLog:
+  - changeSet:
+    id: insert_4
     author: Marsel
     comment: "Create admin user"
     changes:
@@ -23,6 +24,5 @@
                 value: "01.11.1970"
             - column:
                 name: password
-                value: "admin"
-
+                value: "$2a$12$61eplx.I8e/IYAs3whp0JOIX9BNgbH3VpwihcNOpfKJLEMJ.gviJy"
 
