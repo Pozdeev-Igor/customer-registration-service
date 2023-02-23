@@ -46,6 +46,9 @@ public class SpringConfig implements WebMvcConfigurer {
     @Value("${spring.liquibase.change-log}")
     private String changelogFile;
 
+    @Value("${spring.jpa.hibernate.ddl-auto}")
+    private String ddlAuto;
+
     public SpringConfig(ApplicationContext applicationContext) {
         this.applicationContext = applicationContext;
     }
@@ -66,6 +69,7 @@ public class SpringConfig implements WebMvcConfigurer {
         Properties properties = new Properties();
         properties.put("spring.jpa.properties.hibernate.dialect", hibernateDialect);
         properties.put("spring.jpa.show-sql", showSQL);
+        properties.put("spring.jpa.hibernate.ddl-auto", ddlAuto);
 
         return properties;
     }
@@ -96,6 +100,7 @@ public class SpringConfig implements WebMvcConfigurer {
         SpringLiquibase springLiquibase = new SpringLiquibase();
         springLiquibase.setDataSource(this.dataSource());
         springLiquibase.setChangeLog(changelogFile);
+        springLiquibase.setShouldRun(true);
         return springLiquibase;
     }
 }
