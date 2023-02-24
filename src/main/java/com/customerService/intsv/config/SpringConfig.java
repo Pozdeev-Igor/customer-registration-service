@@ -16,6 +16,7 @@ import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 import javax.sql.DataSource;
 import java.util.Properties;
@@ -26,6 +27,7 @@ import java.util.Properties;
 @EnableTransactionManagement
 @EnableJpaRepositories("com.customerService.intsv.repository")
 @PropertySource("classpath:application.properties")
+
 public class SpringConfig implements WebMvcConfigurer {
 
     private final ApplicationContext applicationContext;
