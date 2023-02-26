@@ -2,7 +2,11 @@ package com.customerService.intsv.entity;
 
 import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.*;
+import javax.persistence.Id;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import java.util.UUID;
 
 @Entity
@@ -11,30 +15,17 @@ public class Appointment {
     @Id
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
-    @Column(name = "id")
-    UUID id;
-
+    private UUID id;
     @ManyToOne
-    @JoinColumn(name = "service_type_id")
-    ServiceType serviceType;
-
+    private ServiceType serviceType;
     @ManyToOne
-    @JoinColumn(name = "client_id")
-    Client client;
-
-
+    private Client client;
     @ManyToOne
-    @JoinColumn(name = "barber_id")
-    Barber barber;
-
-
+    private Barber barber;
     @ManyToOne
-    @JoinColumn(name = "day_and_time_id_id")
-    DayAndTime dayAndTimeId;
-
-    @ManyToOne
-    @JoinColumn(name = "feedback_id")
-    Feedback feedback;
+    private DayAndTime dayAndTime;
+    @OneToOne
+    private Feedback feedback;
 
     public UUID getId() {
         return id;
@@ -68,12 +59,12 @@ public class Appointment {
         this.barber = barber;
     }
 
-    public DayAndTime getDayAndTimeId() {
-        return dayAndTimeId;
+    public DayAndTime getDayAndTime() {
+        return dayAndTime;
     }
 
-    public void setDayAndTimeId(DayAndTime dayAndTimeId) {
-        this.dayAndTimeId = dayAndTimeId;
+    public void setDayAndTime(DayAndTime dayAndTime) {
+        this.dayAndTime = dayAndTime;
     }
 
     public Feedback getFeedback() {
@@ -83,6 +74,4 @@ public class Appointment {
     public void setFeedback(Feedback feedback) {
         this.feedback = feedback;
     }
-
-
 }

@@ -2,7 +2,11 @@ package com.customerService.intsv.entity;
 
 import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.*;
+import javax.persistence.Id;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.OneToOne;
+import javax.persistence.OneToMany;
 import java.util.Set;
 import java.util.UUID;
 
@@ -12,28 +16,21 @@ public class Client {
     @Id
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
-    UUID id;
-
-    @Column(name = "first_name")
-    String firstName;
-
-    @Column(name = "last_name")
-    String lastName;
-
-    @Column(name = "login")
-    String login;
-
-    @Column(name = "password")
-    String password;
-
-    @Column(name = "email")
-    String email;
-
-    @Column(name = "phone_number")
-    String phoneNumber;
-    @ManyToOne
-    @JoinColumn(name = "deposit_id")
-    Deposit deposit;
+    private UUID id;
+    private String firstName;
+    private String lastName;
+    private String login;
+    private String password;
+    private String email;
+    private String phoneNumber;
+    private String amount;
+    private String birthDate;
+    @OneToOne
+    private Deposit deposit;
+    @OneToMany
+    private Set<Appointment> appointments;
+    @OneToMany
+    private Set<Feedback> feedbacks;
 
     public UUID getId() {
         return id;
@@ -91,22 +88,6 @@ public class Client {
         this.phoneNumber = phoneNumber;
     }
 
-    public Set<Appointment> getAppointmentSet() {
-        return appointmentSet;
-    }
-
-    public void setAppointmentSet(Set<Appointment> appointmentSet) {
-        this.appointmentSet = appointmentSet;
-    }
-
-    public Set<Feedback> getFeedbackSet() {
-        return feedbackSet;
-    }
-
-    public void setFeedbackSet(Set<Feedback> feedbackSet) {
-        this.feedbackSet = feedbackSet;
-    }
-
     public String getAmount() {
         return amount;
     }
@@ -123,18 +104,6 @@ public class Client {
         this.birthDate = birthDate;
     }
 
-    @OneToMany(mappedBy = "client")
-    Set<Appointment> appointmentSet;
-
-    @OneToMany(mappedBy = "client")
-    Set<Feedback> feedbackSet;
-
-    @Column(name = "amount")
-    String amount;
-
-    @Column(name = "birth_date")
-    String birthDate;
-
     public Deposit getDeposit() {
         return deposit;
     }
@@ -143,4 +112,19 @@ public class Client {
         this.deposit = deposit;
     }
 
+    public Set<Appointment> getAppointments() {
+        return appointments;
+    }
+
+    public void setAppointments(Set<Appointment> appointments) {
+        this.appointments = appointments;
+    }
+
+    public Set<Feedback> getFeedbacks() {
+        return feedbacks;
+    }
+
+    public void setFeedbacks(Set<Feedback> feedbacks) {
+        this.feedbacks = feedbacks;
+    }
 }

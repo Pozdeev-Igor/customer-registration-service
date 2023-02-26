@@ -2,9 +2,10 @@ package com.customerService.intsv.entity;
 
 import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.*;
-import java.util.Calendar;
-import java.util.List;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import java.util.UUID;
 
 @Entity
@@ -12,18 +13,11 @@ public class DayAndTime {
     @Id
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
-    UUID id;
-
-
-    @ManyToOne
-    @JoinColumn(name = "barber_id")
-    Barber barber;
-
-    @OneToOne
-    Appointment appointment;
-
-
-    List<Long> list;
+    private UUID id;
+    @Column(name = "starts_from")
+    private Long from;
+    @Column(name = "ends_with")
+    private Long to;
 
     public UUID getId() {
         return id;
@@ -33,27 +27,19 @@ public class DayAndTime {
         this.id = id;
     }
 
-    public Barber getBarber() {
-        return barber;
+    public Long getFrom() {
+        return from;
     }
 
-    public void setBarber(Barber barber) {
-        this.barber = barber;
+    public void setFrom(Long from) {
+        this.from = from;
     }
 
-    public Appointment getAppointment() {
-        return appointment;
+    public Long getTo() {
+        return to;
     }
 
-    public void setAppointment(Appointment appointment) {
-        this.appointment = appointment;
-    }
-
-    public List<Long> getList() {
-        return list;
-    }
-
-    public void setList(List<Long> list) {
-        this.list = list;
+    public void setTo(Long to) {
+        this.to = to;
     }
 }

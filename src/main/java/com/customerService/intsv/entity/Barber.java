@@ -3,6 +3,7 @@ package com.customerService.intsv.entity;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
@@ -12,41 +13,30 @@ public class Barber {
     @Id
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
-    UUID id;
-
-    @Column(name = "first_name")
-    String firstName;
-
-    @Column(name = "last_name")
-    String lastName;
-
-    @Column(name = "login")
-    String login;
-
-    @Column(name = "password")
-    String password;
-
-    @Column(name = "email")
-    String email;
-
-    @Column(name = "phone_number")
-    String phoneNumber;
-
-    @ManyToMany(mappedBy = "barbers")
-    Set<ServiceType> serviceSet;
-
-    @OneToMany(mappedBy = "barber")
-    Set<Feedback> feedbackSet;
-
-    @Column(name = "amount")
-    String amount;
-
-    @OneToMany(mappedBy = "barber")
-    Set<DayAndTime> dayAndHoursOff;
-
-    @Column(name = "is_active")
-    Boolean isActive;
-
+    private UUID id;
+    private String firstName;
+    private String lastName;
+    private String login;
+    private String password;
+    private String email;
+    private String phoneNumber;
+    private Float rate;
+    private String amount;
+    @ManyToMany
+    private Set<ServiceType> canServe;
+    @OneToMany
+    private Set<Feedback> feedbacks;
+    @OneToMany
+    private Set<Appointment> appointments;
+    @OneToOne
+    private Deposit deposit;
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable( name = "barber_weekends",
+                joinColumns = {@JoinColumn(name = "barber_id")},
+                inverseJoinColumns = {@JoinColumn(name = "day_and_time_id")}
+    )
+    private List<DayAndTime> weekends;
+    private Boolean isActive;
 
     public UUID getId() {
         return id;
@@ -104,20 +94,12 @@ public class Barber {
         this.phoneNumber = phoneNumber;
     }
 
-    public Set<ServiceType> getServiceSet() {
-        return serviceSet;
+    public Float getRate() {
+        return rate;
     }
 
-    public void setServiceSet(Set<ServiceType> serviceSet) {
-        this.serviceSet = serviceSet;
-    }
-
-    public Set<Feedback> getFeedbackSet() {
-        return feedbackSet;
-    }
-
-    public void setFeedbackSet(Set<Feedback> feedbackSet) {
-        this.feedbackSet = feedbackSet;
+    public void setRate(Float rate) {
+        this.rate = rate;
     }
 
     public String getAmount() {
@@ -128,12 +110,44 @@ public class Barber {
         this.amount = amount;
     }
 
-    public Set<DayAndTime> getDayAndHoursOff() {
-        return dayAndHoursOff;
+    public Set<ServiceType> getCanServe() {
+        return canServe;
     }
 
-    public void setDayAndHoursOff(Set<DayAndTime> dayAndHoursOff) {
-        this.dayAndHoursOff = dayAndHoursOff;
+    public void setCanServe(Set<ServiceType> canServe) {
+        this.canServe = canServe;
+    }
+
+    public Set<Feedback> getFeedbacks() {
+        return feedbacks;
+    }
+
+    public void setFeedbacks(Set<Feedback> feedbacks) {
+        this.feedbacks = feedbacks;
+    }
+
+    public Set<Appointment> getAppointments() {
+        return appointments;
+    }
+
+    public void setAppointments(Set<Appointment> appointments) {
+        this.appointments = appointments;
+    }
+
+    public Deposit getDeposit() {
+        return deposit;
+    }
+
+    public void setDeposit(Deposit deposit) {
+        this.deposit = deposit;
+    }
+
+    public List<DayAndTime> getWeekends() {
+        return weekends;
+    }
+
+    public void setWeekends(List<DayAndTime> weekends) {
+        this.weekends = weekends;
     }
 
     public Boolean getActive() {
