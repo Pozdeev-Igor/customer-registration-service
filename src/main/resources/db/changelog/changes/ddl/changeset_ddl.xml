@@ -5,15 +5,15 @@
 
     <changeSet id="20230223_1_init_database.sql" author="igor.pozdeev"  runAlways="false" runOnChange="true">
         <comment>Инициализация БД</comment>
-        <sqlFile    path="ddl/sql/20230223_1_init_database.sql"
-                    relativeToChangelogFile="true"
+        <sqlFile    path="db/changelog/changes/ddl/sql/20230223_1_init_database.sql"
+                    relativeToChangelogFile="false"
                     splitStatements="true"
                     stripComments="true"/>
     </changeSet>
     <changeSet id="20230223_2_fk_add_to_database.sql" author="igor.pozdeev"  runAlways="false" runOnChange="true">
         <comment>Добавление fk</comment>
-        <sqlFile    path="ddl/sql/20230223_2_fk_add_to_database.sql"
-                    relativeToChangelogFile="true"
+        <sqlFile    path="db/changelog/changes/ddl/sql/20230223_2_fk_add_to_database.sql"
+                    relativeToChangelogFile="false"
                     splitStatements="true"
                     stripComments="true"/>
     </changeSet>
