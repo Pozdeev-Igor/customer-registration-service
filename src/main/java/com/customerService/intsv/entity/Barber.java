@@ -2,7 +2,16 @@ package com.customerService.intsv.entity;
 
 import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.GeneratedValue;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Column;
+import javax.persistence.FetchType;
+import javax.persistence.CascadeType;
+import javax.persistence.JoinTable;
+import javax.persistence.JoinColumn;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
@@ -14,21 +23,31 @@ public class Barber {
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
     private UUID id;
+    @Column(name = "first_name")
     private String firstName;
+    @Column(name = "last_name")
     private String lastName;
-    private String login;
+    @Column(name = "password")
     private String password;
+    @Column(name = "email")
     private String email;
+    @Column(name = "phone_number")
     private String phoneNumber;
+    @Column(name = "rate")
     private Float rate;
+    @Column(name = "amount")
     private String amount;
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY,
+            cascade = {
+                    CascadeType.PERSIST,
+                    CascadeType.MERGE
+            })
+    @JoinTable(name = "barber_can_serve",
+            joinColumns = { @JoinColumn(name = "barber_id") },
+            inverseJoinColumns = { @JoinColumn(name = "can_serve_id") })
     private Set<ServiceType> canServe;
-    @OneToMany
-    private Set<Feedback> feedbacks;
-    @OneToMany
-    private Set<Appointment> appointments;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "deposit_id", referencedColumnName = "id")
     private Deposit deposit;
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable( name = "barber_weekends",
@@ -36,6 +55,7 @@ public class Barber {
                 inverseJoinColumns = {@JoinColumn(name = "day_and_time_id")}
     )
     private List<DayAndTime> weekends;
+    @Column(name = "is_active")
     private Boolean isActive;
 
     public UUID getId() {
@@ -60,14 +80,6 @@ public class Barber {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
-    }
-
-    public String getLogin() {
-        return login;
-    }
-
-    public void setLogin(String login) {
-        this.login = login;
     }
 
     public String getPassword() {
@@ -116,22 +128,6 @@ public class Barber {
 
     public void setCanServe(Set<ServiceType> canServe) {
         this.canServe = canServe;
-    }
-
-    public Set<Feedback> getFeedbacks() {
-        return feedbacks;
-    }
-
-    public void setFeedbacks(Set<Feedback> feedbacks) {
-        this.feedbacks = feedbacks;
-    }
-
-    public Set<Appointment> getAppointments() {
-        return appointments;
-    }
-
-    public void setAppointments(Set<Appointment> appointments) {
-        this.appointments = appointments;
     }
 
     public Deposit getDeposit() {

@@ -3,11 +3,7 @@ package com.customerService.intsv.entity;
 import org.hibernate.annotations.GenericGenerator;
 
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 import java.util.UUID;
 
 @Entity
@@ -18,14 +14,19 @@ public class Appointment {
     @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
     private UUID id;
     @ManyToOne
+//    @Column(name = "service_type_id")
     private ServiceType serviceType;
     @ManyToOne
+//    @Column(name = "client_id")
     private Client client;
     @ManyToOne
+//    @Column(name = "barber_id")
     private Barber barber;
     @ManyToOne
+//    @Column(name = "day_and_time_id")
     private DayAndTime dayAndTime;
     @OneToOne
+//    @Column(name = "feedback_id")
     private Feedback feedback;
 
     public UUID getId() {

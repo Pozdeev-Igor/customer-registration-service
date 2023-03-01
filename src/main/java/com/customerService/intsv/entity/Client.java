@@ -3,11 +3,9 @@ package com.customerService.intsv.entity;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
-import javax.persistence.OneToMany;
-import java.util.Set;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Column;
 import java.util.UUID;
 
 @Entity
@@ -17,20 +15,20 @@ public class Client {
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
     private UUID id;
+    @Column(name = "first_name")
     private String firstName;
+    @Column(name = "last_name")
     private String lastName;
-    private String login;
+    @Column(name = "password")
     private String password;
+    @Column(name = "email")
     private String email;
+    @Column(name = "phone_number")
     private String phoneNumber;
+    @Column(name = "amount")
     private String amount;
+    @Column(name = "birth_date")
     private String birthDate;
-    @OneToOne
-    private Deposit deposit;
-    @OneToMany
-    private Set<Appointment> appointments;
-    @OneToMany
-    private Set<Feedback> feedbacks;
 
     public UUID getId() {
         return id;
@@ -54,14 +52,6 @@ public class Client {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
-    }
-
-    public String getLogin() {
-        return login;
-    }
-
-    public void setLogin(String login) {
-        this.login = login;
     }
 
     public String getPassword() {
@@ -102,29 +92,5 @@ public class Client {
 
     public void setBirthDate(String birthDate) {
         this.birthDate = birthDate;
-    }
-
-    public Deposit getDeposit() {
-        return deposit;
-    }
-
-    public void setDeposit(Deposit deposit) {
-        this.deposit = deposit;
-    }
-
-    public Set<Appointment> getAppointments() {
-        return appointments;
-    }
-
-    public void setAppointments(Set<Appointment> appointments) {
-        this.appointments = appointments;
-    }
-
-    public Set<Feedback> getFeedbacks() {
-        return feedbacks;
-    }
-
-    public void setFeedbacks(Set<Feedback> feedbacks) {
-        this.feedbacks = feedbacks;
     }
 }

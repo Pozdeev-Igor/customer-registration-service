@@ -1,15 +1,23 @@
 package com.customerService.intsv.controller;
 
-import org.springframework.stereotype.Controller;
+import com.customerService.intsv.entity.Client;
+import com.customerService.intsv.repository.ClientRepo;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class TestController {
 
+    private final ClientRepo clientRepo;
+
+    public TestController(ClientRepo clientRepo) {
+        this.clientRepo = clientRepo;
+    }
+
     @GetMapping("/test")
     public String test(){
-        return "Stupid Swagger!!!";
+        Client client = clientRepo.findByAmount("Marsel, i'm ALIVE!!!");
+        return client.getAmount();
     }
 
 }

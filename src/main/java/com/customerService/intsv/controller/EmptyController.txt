@@ -1,0 +1,101 @@
+create table appointment (
+    id uuid not null,
+    barber_id uuid,
+    client_id uuid,
+    day_and_time_id uuid,
+    feedback_id uuid,
+    service_type_id uuid,
+    primary key (id)
+    );
+
+create table barber (
+    id uuid not null,
+    amount varchar(255),
+    email varchar(100),
+    first_name varchar(100),
+    is_active boolean,
+    last_name varchar(100),
+    password varchar(100),
+    phone_number varchar(15),
+    rate float4,
+    deposit_id uuid,
+    primary key (id)
+    );
+
+create table barber_can_serve (
+    barber_id uuid not null,
+    can_serve_id uuid not null,
+    primary key (barber_id, can_serve_id)
+    );
+
+create table barber_weekends (
+    barber_id uuid not null,
+    day_and_time_id uuid not null
+    );
+
+create table client (
+    id uuid not null,
+    amount varchar(255),
+    birth_date varchar(20),
+    email varchar(100),
+    first_name varchar(100),
+    last_name varchar(100),
+    password varchar(100),
+    phone_number varchar(20),
+    primary key (id)
+    );
+
+create table day_and_time (
+    id uuid not null,
+    starts_from int8,
+    ends_with int8,
+    primary key (id)
+    );
+
+create table deposit (
+    id uuid not null,
+    deposit_name varchar(255),
+    money_pool varchar(255),
+    barber_id uuid,
+    client_id uuid,
+    primary key (id)
+    );
+
+create table feedback (
+    id uuid not null,
+    comment varchar(1000),
+    rate int2,
+    appointment_id uuid,
+    primary key (id)
+    );
+
+create table service_type (
+    id uuid not null,
+    description varchar(255),
+    name varchar(255),
+    primary key (id)
+    );
+
+create table service_type_appointments (
+    service_type_id uuid not null,
+    appointments_id uuid not null,
+    primary key (service_type_id, appointments_id)
+    );
+
+
+alter table service_type_appointments add constraint UK_rh101482d0ruglgvm2ulpp0m3 unique (appointments_id)
+alter table appointment add constraint FKmnyoncbc9dic1sb8awa0y64d5 foreign key (barber_id) references barber
+alter table appointment add constraint FK3gbqcfd3mnwwcit63lybpqcf8 foreign key (client_id) references client
+alter table appointment add constraint FKknubtaym81loju5bs1pqxurkx foreign key (day_and_time_id) references day_and_time
+alter table appointment add constraint FKq4dt8y3uehw8vtsde62wk1h0r foreign key (feedback_id) references feedback
+alter table appointment add constraint FKs3yieb1gxfqp3bdwq6224ktf2 foreign key (service_type_id) references service_type
+alter table barber add constraint FKh99mgwkxwhn50fnoejjkam7sa foreign key (deposit_id) references deposit
+alter table barber_can_serve add constraint FKk1qyvjxkudj3drtvi9h69ucim foreign key (can_serve_id) references service_type
+alter table barber_can_serve add constraint FK7ru2n42eddr2tvtn1eqt9it2c foreign key (barber_id) references barber
+alter table barber_weekends add constraint FKjw9f3jv6xeviibwa4aty366ip foreign key (day_and_time_id) references day_and_time
+alter table barber_weekends add constraint FKa1mn85xgyo8ky0k78ikq9l1k5 foreign key (barber_id) references barber
+alter table deposit add constraint FK5j1mikahsb7jtjq7wkwlhxcf4 foreign key (barber_id) references barber
+alter table deposit add constraint FKey7qgtdvk8nipnlgbuagofnqc foreign key (client_id) references client
+alter table feedback add constraint FK9wfgrg1xqrkfk32mwisl37o0v foreign key (appointment_id) references appointment
+alter table service_type_appointments add constraint FK86pnj18vfcul3nw2ewutnlvaw foreign key (appointments_id) references appointment
+alter table service_type_appointments add constraint FK31ejev85kstu07ci73iippfnj foreign key (service_type_id) references service_type
