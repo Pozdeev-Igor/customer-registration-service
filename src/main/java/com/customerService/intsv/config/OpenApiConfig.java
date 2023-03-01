@@ -30,12 +30,12 @@ public class OpenApiConfig {
             @Value("customerService - to do service") String appDescription,
             @Value("0.0.1-SNAPSHOT}") String appVersion) {
         return new OpenAPI().info(new Info().title("Applecation API")
-                        .version(appVersion)
-                        .description(appDescription)
-                        .license(new License().name("Apache 2.0")
-                                .url("http://springdoc.org"))
-                        .contact(new Contact().name("Marsel")
-                                .email("test@gmail.com")))
+                .version(appVersion)
+                .description(appDescription)
+                .license(new License().name("Apache 2.0")
+                        .url("http://springdoc.org"))
+                .contact(new Contact().name("Marsel")
+                        .email("test@gmail.com")))
                 .servers(List.of(new Server().url("http://localhost:8080")
                         .description("Dev service"),new Server().url("http://localhost:8082")
                         .description("Beta Service")));

@@ -3,8 +3,8 @@ package com.customerService.intsv.entity;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.Entity;
-import javax.persistence.Id;
 import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import java.util.UUID;
 
