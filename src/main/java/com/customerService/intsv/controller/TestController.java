@@ -16,8 +16,8 @@ public class TestController {
 
     @GetMapping("/test")
     public String test(){
-        Client client = clientRepo.findByAmount("Marsel, i'm ALIVE!!!");
-        return client.getAmount();
+
+        return "WELL,WELL,WELL...";
     }
 
 }
