@@ -21,7 +21,6 @@ create table barber (
                         password varchar(100),
                         phone_number varchar(15),
                         rate float4,
-                        deposit_id uuid,
                         primary key (id)
 );
 
