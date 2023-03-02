@@ -1,15 +1,23 @@
 package com.customerService.intsv.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.GenericGenerator;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Column;
+import javax.persistence.OneToMany;
+import javax.persistence.FetchType;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
-public class Client {
+public class Client implements UserDetails {
 
     @Id
     @GeneratedValue(generator = "UUID")
@@ -29,6 +37,9 @@ public class Client {
     private String amount;
     @Column(name = "birth_date")
     private String birthDate;
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "client")
+    @JsonIgnore
+    private List<Authority> authorities = new ArrayList<>();
 
     public UUID getId() {
         return id;
@@ -54,9 +65,6 @@ public class Client {
         this.lastName = lastName;
     }
 
-    public String getPassword() {
-        return password;
-    }
 
     public void setPassword(String password) {
         this.password = password;
@@ -92,5 +100,38 @@ public class Client {
 
     public void setBirthDate(String birthDate) {
         this.birthDate = birthDate;
+    }
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return authorities;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    @Override
+    public String getUsername() {
+        return firstName;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
     }
 }

@@ -1,23 +1,28 @@
 package com.customerService.intsv.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.GenericGenerator;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.GeneratedValue;
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Column;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.FetchType;
 import javax.persistence.CascadeType;
 import javax.persistence.JoinTable;
 import javax.persistence.JoinColumn;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 import java.util.UUID;
+import java.util.Set;
+import java.util.Collection;
 
 @Entity
-public class Barber {
+public class Barber implements UserDetails {
 
     @Id
     @GeneratedValue(generator = "UUID")
@@ -46,9 +51,7 @@ public class Barber {
             joinColumns = { @JoinColumn(name = "barber_id") },
             inverseJoinColumns = { @JoinColumn(name = "can_serve_id") })
     private Set<ServiceType> canServe;
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "deposit_id", referencedColumnName = "id")
-    private Deposit deposit;
+
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable( name = "barber_weekends",
                 joinColumns = {@JoinColumn(name = "barber_id")},
@@ -57,6 +60,10 @@ public class Barber {
     private List<DayAndTime> weekends;
     @Column(name = "is_active")
     private Boolean isActive;
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "barber")
+    @JsonIgnore
+    private List<Authority> authorities = new ArrayList<>();
 
     public UUID getId() {
         return id;
@@ -130,14 +137,6 @@ public class Barber {
         this.canServe = canServe;
     }
 
-    public Deposit getDeposit() {
-        return deposit;
-    }
-
-    public void setDeposit(Deposit deposit) {
-        this.deposit = deposit;
-    }
-
     public List<DayAndTime> getWeekends() {
         return weekends;
     }
@@ -152,5 +151,36 @@ public class Barber {
 
     public void setActive(Boolean active) {
         isActive = active;
+    }
+
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return authorities;
+    }
+
+    @Override
+    public String getUsername() {
+        return firstName;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
     }
 }

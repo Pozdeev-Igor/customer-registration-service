@@ -17,4 +17,18 @@
                     splitStatements="true"
                     stripComments="true"/>
     </changeSet>
+    <changeSet id="20230302_3_alter_table_barber.sql" author="igor.pozdeev"  runAlways="false" runOnChange="true">
+        <comment>Корректировка таблицы barber</comment>
+        <sqlFile    path="db.changelog/changes/ddl/sql/20230302_3_alter_table_barber.sql"
+                    relativeToChangelogFile="false"
+                    splitStatements="true"
+                    stripComments="true"/>
+    </changeSet>
+    <changeSet id="20230302_4_create_table_authority.sql" author="igor.pozdeev"  runAlways="false" runOnChange="true">
+        <comment>добавление таблицы authorities</comment>
+        <sqlFile    path="db.changelog/changes/ddl/sql/20230302_4_create_table_authority.sql"
+                    relativeToChangelogFile="false"
+                    splitStatements="true"
+                    stripComments="true"/>
+    </changeSet>
 </databaseChangeLog>
