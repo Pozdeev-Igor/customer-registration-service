@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<databaseChangeLog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" logicalFilePath="path-independent"
+                   xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+
+    <changeSet id="20230223_1_init_database.sql" author="igor.pozdeev"  runAlways="false" runOnChange="true">
+        <comment>Инициализация БД</comment>
+        <sqlFile    path="db.changelog/changes/ddl/sql/20230223_1_init_database.sql"
+                    relativeToChangelogFile="false"
+                    splitStatements="true"
+                    stripComments="true"/>
+    </changeSet>
+    <changeSet id="20230223_2_fk_add_to_database.sql" author="igor.pozdeev"  runAlways="false" runOnChange="true">
+        <comment>Добавление fk</comment>
+        <sqlFile    path="db.changelog/changes/ddl/sql/20230223_2_fk_add_to_database.sql"
+                    relativeToChangelogFile="false"
+                    splitStatements="true"
+                    stripComments="true"/>
+    </changeSet>
+    <changeSet id="20230302_3_alter_table_barber.sql" author="igor.pozdeev"  runAlways="false" runOnChange="true">
+        <comment>Корректировка таблицы barber</comment>
+        <sqlFile    path="db.changelog/changes/ddl/sql/20230302_3_alter_table_barber.sql"
+                    relativeToChangelogFile="false"
+                    splitStatements="true"
+                    stripComments="true"/>
+    </changeSet>
+    <changeSet id="20230302_4_create_table_authority.sql" author="igor.pozdeev"  runAlways="false" runOnChange="true">
+        <comment>добавление таблицы authorities</comment>
+        <sqlFile    path="db.changelog/changes/ddl/sql/20230302_4_create_table_authority.sql"
+                    relativeToChangelogFile="false"
+                    splitStatements="true"
+                    stripComments="true"/>
+    </changeSet>
+</databaseChangeLog>
