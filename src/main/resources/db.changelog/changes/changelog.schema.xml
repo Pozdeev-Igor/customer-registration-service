@@ -6,4 +6,3 @@
     <include file="ddl/changeset_ddl.xml" relativeToChangelogFile="true"/>
 
 </databaseChangeLog>
-

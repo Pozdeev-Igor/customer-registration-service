@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
+import javax.persistence.Column;
 import java.util.UUID;
 
 @Entity
@@ -15,9 +16,12 @@ public class Feedback {
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
     private UUID id;
+    @Column(name = "rate")
     private Short rate;
+    @Column(name = "comment")
     private String comment;
     @OneToOne
+//    @Column(name = "appointment_id")
     private Appointment appointment;
 
     public UUID getId() {

@@ -5,8 +5,6 @@ import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.Column;
 import java.util.UUID;
 
@@ -17,9 +15,9 @@ public class DayAndTime {
     @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
     private UUID id;
     @Column(name = "starts_from")
-    private Long from;
+    private Long startingFrom;
     @Column(name = "ends_with")
-    private Long to;
+    private Long endingTime;
 
     public UUID getId() {
         return id;
@@ -29,19 +27,19 @@ public class DayAndTime {
         this.id = id;
     }
 
-    public Long getFrom() {
-        return from;
+    public Long getStartingFrom() {
+        return startingFrom;
     }
 
-    public void setFrom(Long from) {
-        this.from = from;
+    public void setStartingFrom(Long from) {
+        this.startingFrom = from;
     }
 
-    public Long getTo() {
-        return to;
+    public Long getEndingTime() {
+        return endingTime;
     }
 
-    public void setTo(Long to) {
-        this.to = to;
+    public void setEndingTime(Long to) {
+        this.endingTime = to;
     }
 }
