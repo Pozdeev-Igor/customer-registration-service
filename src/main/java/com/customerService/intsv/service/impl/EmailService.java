@@ -18,6 +18,7 @@ import java.util.List;
 @Service
 public class EmailService {
 
+
     private JavaMailSender javaMailSender;
 
     @Autowired
