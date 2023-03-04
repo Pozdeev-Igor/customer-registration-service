@@ -9,7 +9,7 @@ import javax.persistence.Column;
 import java.util.UUID;
 
 @Entity
-public class DayAndTime {
+public class DayAndTime { //RecordingDate
     @Id
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")

@@ -8,4 +8,6 @@ public class CustomerServiceRunner {
     public static void main(String[] args) {
         SpringApplication.run(CustomerServiceRunner.class, args);
     }
+
 }
+

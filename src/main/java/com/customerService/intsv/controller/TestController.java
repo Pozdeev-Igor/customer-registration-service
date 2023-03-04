@@ -1,6 +1,5 @@
 package com.customerService.intsv.controller;
 
-import com.customerService.intsv.entity.Client;
 import com.customerService.intsv.repository.ClientRepo;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,8 +15,8 @@ public class TestController {
 
     @GetMapping("/test")
     public String test(){
-        Client client = clientRepo.findByAmount("Marsel, i'm ALIVE!!!");
-        return client.getAmount();
+
+        return "WELL,WELL,WELL...";
     }
 
 }
