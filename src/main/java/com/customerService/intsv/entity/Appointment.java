@@ -20,9 +20,9 @@ public class Appointment {
     @ManyToOne
     private ServiceType serviceType;
     @ManyToOne
-    private Client client;
+    private User client;
     @ManyToOne
-    private Barber barber;
+    private User barber;
     @ManyToOne
     private DayAndTime dayAndTime;
     @OneToOne
@@ -44,19 +44,19 @@ public class Appointment {
         this.serviceType = serviceType;
     }
 
-    public Client getClient() {
+    public User getClient() {
         return client;
     }
 
-    public void setClient(Client client) {
+    public void setClient(User client) {
         this.client = client;
     }
 
-    public Barber getBarber() {
+    public User getBarber() {
         return barber;
     }
 
-    public void setBarber(Barber barber) {
+    public void setBarber(User barber) {
         this.barber = barber;
     }
 

@@ -31,4 +31,27 @@
                     splitStatements="true"
                     stripComments="true"/>
     </changeSet>
+    <changeSet id="20230305_5_totall_DB_repare.sql" author="igor.pozdeev"  runAlways="false" runOnChange="true">
+        <comment>ремонт БД</comment>
+        <sqlFile    path="db.changelog/changes/ddl/sql/20230305_5_totall_DB_repare.sql"
+                    relativeToChangelogFile="false"
+                    splitStatements="true"
+                    stripComments="true"/>
+    </changeSet>
+    <changeSet id="20230305_6_alter_table_authority.sql" author="igor.pozdeev"  runAlways="false" runOnChange="true">
+        <comment>удаление лишнего столбца</comment>
+        <sqlFile    path="db.changelog/changes/ddl/sql/20230305_6_alter_table_authority.sql"
+                    relativeToChangelogFile="false"
+                    splitStatements="true"
+                    stripComments="true"/>
+    </changeSet>
+    <changeSet id="20230305_7_fk_add_to_users_db.sql" author="igor.pozdeev"  runAlways="false" runOnChange="true">
+        <comment>добавление fk для таблицы users</comment>
+        <sqlFile    path="db.changelog/changes/ddl/sql/20230305_7_fk_add_to_users_db.sql"
+                    relativeToChangelogFile="false"
+                    splitStatements="true"
+                    stripComments="true"/>
+    </changeSet>
 </databaseChangeLog>
+
+

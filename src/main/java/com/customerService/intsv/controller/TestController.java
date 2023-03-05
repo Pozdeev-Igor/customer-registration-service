@@ -1,16 +1,16 @@
 package com.customerService.intsv.controller;
 
-import com.customerService.intsv.repository.ClientRepo;
+import com.customerService.intsv.repository.UserRepository;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class TestController {
 
-    private final ClientRepo clientRepo;
+    private final UserRepository userRepo;
 
-    public TestController(ClientRepo clientRepo) {
-        this.clientRepo = clientRepo;
+    public TestController(UserRepository clientRepo) {
+        this.userRepo = clientRepo;
     }
 
     @GetMapping("/test")
