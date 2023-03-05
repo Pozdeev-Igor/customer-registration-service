@@ -20,9 +20,7 @@ public class Authority implements GrantedAuthority {
     @Column(name = "authority")
     private String authority;
     @ManyToOne(optional = false)
-    private Client client;
-    @ManyToOne(optional = false)
-    private Barber barber;
+    private User user;
 
 
     public Authority() {
@@ -31,37 +29,24 @@ public class Authority implements GrantedAuthority {
         this.authority = authority;
     }
 
-
     @Override
     public String getAuthority() {
         return authority;
     }
-
     public UUID getId() {
         return id;
     }
-
-    public Client getClient() {
-        return client;
+    public User getUser() {
+        return user;
     }
-
-    public Barber getBarber() {
-        return barber;
-    }
-
     public void setId(UUID id) {
         this.id = id;
     }
-
     public void setAuthority(String authority) {
         this.authority = authority;
     }
-
-    public void setClient(Client client) {
-        this.client = client;
+    public void setUser(User user) {
+        this.user = user;
     }
 
-    public void setBarber(Barber barber) {
-        this.barber = barber;
-    }
 }

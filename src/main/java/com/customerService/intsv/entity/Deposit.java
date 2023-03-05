@@ -22,9 +22,9 @@ public class Deposit {
     @Column(name = "money_pool")
     private String moneyPool;
     @ManyToOne(fetch = FetchType.LAZY)
-    private Client client;
+    private User client;
     @ManyToOne(fetch = FetchType.LAZY)
-    private Barber barber;
+    private User barber;
 
     public UUID getId() {
         return id;
@@ -50,19 +50,19 @@ public class Deposit {
         this.moneyPool = moneyPool;
     }
 
-    public Client getClient() {
+    public User getClient() {
         return client;
     }
 
-    public void setClient(Client client) {
+    public void setClient(User client) {
         this.client = client;
     }
 
-    public Barber getBarber() {
+    public User getBarber() {
         return barber;
     }
 
-    public void setBarber(Barber barber) {
+    public void setBarber(User barber) {
         this.barber = barber;
     }
 }
