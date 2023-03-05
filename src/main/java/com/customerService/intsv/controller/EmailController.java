@@ -1,6 +1,6 @@
 package com.customerService.intsv.controller;
 
-import com.customerService.intsv.entity.EmailRequest;
+import com.customerService.intsv.request.EmailRequest;
 import com.customerService.intsv.service.impl.EmailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

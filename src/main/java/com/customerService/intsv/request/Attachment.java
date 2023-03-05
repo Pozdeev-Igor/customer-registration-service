@@ -1,4 +1,4 @@
-package com.customerService.intsv.entity;
+package com.customerService.intsv.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

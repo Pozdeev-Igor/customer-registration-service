@@ -1,7 +1,7 @@
 package com.customerService.intsv.service.impl;
 
-import com.customerService.intsv.entity.Attachment;
-import com.customerService.intsv.entity.EmailRequest;
+import com.customerService.intsv.request.Attachment;
+import com.customerService.intsv.request.EmailRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ByteArrayResource;
@@ -12,7 +12,6 @@ import org.springframework.util.CollectionUtils;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
-import java.util.List;
 
 @Slf4j
 @Service
