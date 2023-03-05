@@ -4,8 +4,8 @@ import com.customerService.intsv.config.JwtService;
 import com.customerService.intsv.dto.request.AuthenticationRequest;
 import com.customerService.intsv.dto.request.RegisterRequest;
 import com.customerService.intsv.dto.response.AuthenticationResponse;
-import com.customerService.intsv.entity.Client;
-import com.customerService.intsv.repository.ClientRepository;
+import com.customerService.intsv.entity.User;
+import com.customerService.intsv.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -16,13 +16,13 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class AuthenticationService {
 
-    private final ClientRepository repository;
+    private final UserRepository repository;
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
 
     public AuthenticationResponse register(RegisterRequest request) {
-        Client user = Client.builder()
+        User user = User.builder()
             .firstName(request.getFirstname())
             .lastName(request.getLastname())
             .email(request.getEmail())
@@ -42,7 +42,7 @@ public class AuthenticationService {
                 request.getPassword()
             )
         );
-        Client user = repository.findByEmail(request.getEmail())
+        User user = repository.findByEmail(request.getEmail())
             .orElseThrow();
         String token = jwtService.generateToken(user);
         return AuthenticationResponse.builder()
