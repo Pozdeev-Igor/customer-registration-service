@@ -1,4 +1,4 @@
 package com.customerService.intsv.service;
 
-public interface BarberService {
+public interface UserService {
 }

@@ -5,29 +5,18 @@ import org.hibernate.annotations.GenericGenerator;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Column;
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
-import javax.persistence.FetchType;
-import javax.persistence.CascadeType;
-import javax.persistence.JoinTable;
-import javax.persistence.JoinColumn;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
-import java.util.Set;
-import java.util.Collection;
+import javax.persistence.*;
+import java.util.*;
 
 @Entity
-public class Barber implements UserDetails {
+@Table(name = "users")
+public class User implements UserDetails {
 
     @Id
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
     private UUID id;
+
     @Column(name = "first_name")
     private String firstName;
     @Column(name = "last_name")
@@ -38,10 +27,16 @@ public class Barber implements UserDetails {
     private String email;
     @Column(name = "phone_number")
     private String phoneNumber;
-    @Column(name = "rate")
-    private Float rate;
     @Column(name = "amount")
     private String amount;
+    @Column(name = "rate")
+    private Float rate;
+    @Column(name = "birth_date")
+    private String birthDate;
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
+    @JsonIgnore
+    private List<Authority> authorities = new ArrayList<>();
+
     @ManyToMany(fetch = FetchType.LAZY,
             cascade = {
                     CascadeType.PERSIST,
@@ -54,16 +49,13 @@ public class Barber implements UserDetails {
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable( name = "barber_weekends",
-                joinColumns = {@JoinColumn(name = "barber_id")},
-                inverseJoinColumns = {@JoinColumn(name = "day_and_time_id")}
+            joinColumns = {@JoinColumn(name = "barber_id")},
+            inverseJoinColumns = {@JoinColumn(name = "day_and_time_id")}
     )
     private List<DayAndTime> weekends;
+
     @Column(name = "is_active")
     private Boolean isActive;
-
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "barber")
-    @JsonIgnore
-    private List<Authority> authorities = new ArrayList<>();
 
     public UUID getId() {
         return id;
@@ -89,6 +81,7 @@ public class Barber implements UserDetails {
         this.lastName = lastName;
     }
 
+    @Override
     public String getPassword() {
         return password;
     }
@@ -113,20 +106,24 @@ public class Barber implements UserDetails {
         this.phoneNumber = phoneNumber;
     }
 
-    public Float getRate() {
-        return rate;
-    }
-
-    public void setRate(Float rate) {
-        this.rate = rate;
-    }
-
     public String getAmount() {
         return amount;
     }
 
     public void setAmount(String amount) {
         this.amount = amount;
+    }
+
+    public String getBirthDate() {
+        return birthDate;
+    }
+
+    public void setBirthDate(String birthDate) {
+        this.birthDate = birthDate;
+    }
+
+    public void setAuthorities(List<Authority> authorities) {
+        this.authorities = authorities;
     }
 
     public Set<ServiceType> getCanServe() {
@@ -153,15 +150,17 @@ public class Barber implements UserDetails {
         isActive = active;
     }
 
+    public Float getRate() {
+        return rate;
+    }
 
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return authorities;
+    public void setRate(Float rate) {
+        this.rate = rate;
     }
 
     @Override
     public String getUsername() {
-        return firstName;
+        return phoneNumber;
     }
 
     @Override
@@ -182,5 +181,9 @@ public class Barber implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
+    }
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return authorities;
     }
 }
