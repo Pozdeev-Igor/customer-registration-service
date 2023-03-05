@@ -61,7 +61,7 @@ public class User implements UserDetails {
     @Builder
     public User(UUID id, String firstName, String lastName,
                 String password, String email, String phoneNumber,
-                String amount, Float rate, Boolean isActive) {
+                String amount, Float rate, Boolean isActive, List<Authority> authorities) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -71,6 +71,7 @@ public class User implements UserDetails {
         this.amount = amount;
         this.rate = rate;
         this.isActive = isActive;
+        this.authorities = authorities;
     }
 
     public UUID getId() {
