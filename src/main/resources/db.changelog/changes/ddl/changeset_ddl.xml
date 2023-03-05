@@ -52,6 +52,13 @@
                     splitStatements="true"
                     stripComments="true"/>
     </changeSet>
+    <changeSet id="20230305_8_add-test-users.sql" author="igor.pozdeev"  runAlways="false" runOnChange="true">
+        <comment>добавление пользователей для тестирования</comment>
+        <sqlFile    path="db.changelog/changes/ddl/sql/20230305_8_add-test-users.sql"
+                    relativeToChangelogFile="false"
+                    splitStatements="true"
+                    stripComments="true"/>
+    </changeSet>
 </databaseChangeLog>
 
 
