@@ -1,6 +1,7 @@
 package com.customerService.intsv.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.Builder;
 import org.hibernate.annotations.GenericGenerator;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -17,6 +18,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Entity
+@Builder
 public class Client implements UserDetails {
 
     @Id
@@ -112,7 +114,7 @@ public class Client implements UserDetails {
 
     @Override
     public String getUsername() {
-        return firstName;
+        return email;
     }
 
     @Override
