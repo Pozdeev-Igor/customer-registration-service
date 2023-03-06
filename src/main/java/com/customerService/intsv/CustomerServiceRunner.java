@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 @OpenAPIDefinition(servers = {
-        @Server( url = "https://customer-registration-service-production-50d8.up.railway.app", description = "web")
+        @Server( url = "https://customer-registration-service-production.up.railway.app", description = "web")
 })
 public class CustomerServiceRunner {
     public static void main(String[] args) {
