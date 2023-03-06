@@ -1,6 +1,8 @@
 package com.customerService.intsv.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -10,6 +12,7 @@ import java.util.*;
 
 @Entity
 @Table(name = "users")
+@NoArgsConstructor
 public class User implements UserDetails {
 
     @Id
@@ -31,8 +34,6 @@ public class User implements UserDetails {
     private String amount;
     @Column(name = "rate")
     private Float rate;
-    @Column(name = "birth_date")
-    private String birthDate;
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
     @JsonIgnore
     private List<Authority> authorities = new ArrayList<>();
@@ -56,6 +57,22 @@ public class User implements UserDetails {
 
     @Column(name = "is_active")
     private Boolean isActive;
+
+    @Builder
+    public User(UUID id, String firstName, String lastName,
+                String password, String email, String phoneNumber,
+                String amount, Float rate, Boolean isActive, List<Authority> authorities) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.password = password;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+        this.amount = amount;
+        this.rate = rate;
+        this.isActive = isActive;
+        this.authorities = authorities;
+    }
 
     public UUID getId() {
         return id;
@@ -114,14 +131,6 @@ public class User implements UserDetails {
         this.amount = amount;
     }
 
-    public String getBirthDate() {
-        return birthDate;
-    }
-
-    public void setBirthDate(String birthDate) {
-        this.birthDate = birthDate;
-    }
-
     public void setAuthorities(List<Authority> authorities) {
         this.authorities = authorities;
     }
@@ -160,7 +169,7 @@ public class User implements UserDetails {
 
     @Override
     public String getUsername() {
-        return phoneNumber;
+        return email;
     }
 
     @Override
