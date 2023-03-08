@@ -14,7 +14,6 @@ import javax.mail.MessagingException;
 @RestController
 public class EmailController {
 
-
     private EmailService emailService;
 
     @Autowired
