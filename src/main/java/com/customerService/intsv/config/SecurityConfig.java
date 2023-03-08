@@ -23,7 +23,7 @@ public class SecurityConfig {
         http
             .csrf()
             .disable()
-            .authorizeHttpRequests().antMatchers("/auth/**").permitAll()
+            .authorizeHttpRequests().antMatchers("/**").permitAll()
             .anyRequest().authenticated()
             .and()
             .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
